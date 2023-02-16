@@ -207,6 +207,21 @@ export default function ActionsPlugin({
         aria-label="Clear editor contents">
         <i className="clear" />
       </button>
+
+      <button
+        className={`action-button ${!isEditable ? 'unlock' : 'lock'}`}
+        onClick={() => {
+          // Send latest editor state to commenting validation server
+          if (isEditable) {
+            sendEditorState(editor);
+          }
+          editor.setEditable(!editor.isEditable());
+        }}
+        title="PDF Mode"
+        aria-label={`${!isEditable ? 'Unlock' : 'Lock'} read-only mode`}>
+        <i className={!isEditable ? 'unlock' : 'lock'} />
+      </button>
+
       <button
         className={`action-button ${!isEditable ? 'unlock' : 'lock'}`}
         onClick={() => {
